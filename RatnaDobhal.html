@@ -1,0 +1,132 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Circle Project</title>
+    <style>
+      .container {
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        position: relative;
+      }
+      .circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 30px;
+        position: absolute;
+      }
+      .circle1 {
+        left: 0;
+        top: 0;
+      }
+
+      .circle2 {
+        right: 0;
+        top: 0;
+        right: 50px;
+        transform: rotate(270deg);
+        transform-origin: top right;
+      }
+
+      .circle3 {
+        left: 50px;
+        bottom: 0;
+        transform: rotate(270deg);
+        transform-origin: bottom left;
+      }
+
+      .circle4 {
+        right: 0;
+        bottom: 0;
+      }
+      .color1 {
+        background-color: #f74040b8;
+      }
+
+      .color2 {
+        background-color: #57b557;
+      }
+
+      .color3 {
+        background-color: #2cb0e2;
+      }
+
+      .color4 {
+        background-color: #fdfd3f;
+      }
+      @keyframes slide {
+        0% {
+          width: 50px;
+        }
+        40% {
+          width: 200px;
+        }
+        80% {
+          width: 50px;
+        }
+      }
+      #buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 0 300px;
+      }
+      #buttons button {
+        background-color: green;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="circle circle1 color1"></div>
+        <div class="circle circle2 color2"></div>
+        <div class="circle circle3 color3"></div>
+        <div class="circle circle4 color4"></div>
+      </div>
+    </div>
+    <div id="buttons">
+      <button id="start">start</button>
+      <button id="stop">stop</button>
+    </div>
+  </body>
+  <script>
+    const start = document.getElementById("start");
+    const stop = document.getElementById("stop");
+    const colorClass = ["color1", "color2", "color3", "color4"];
+    const circle = document.querySelectorAll(".circle");
+    let id = null;
+    let i = 0;
+    const addAnimation = () => {
+      i = (i + 1) % 4;
+      circle.forEach((c) => {
+        c.style.animation = "slide 2s linear infinite";
+        c.classList.remove("color1", "color2", "color3", "color4");
+        c.classList.add(colorClass[i]);
+        i = (i + 1) % 4;
+      });
+    };
+
+    start.addEventListener("click", () => {
+      i = 0;
+      addAnimation();
+      id = setInterval(addAnimation, 2000);
+    });
+
+    stop.addEventListener("click", () => {
+      clearInterval(id);
+      circle.forEach((c) => {
+        c.style.animation = "";
+      });
+    });
+  </script>
+</html>
