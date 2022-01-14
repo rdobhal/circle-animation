@@ -78,10 +78,13 @@
         align-items: center;
         justify-content: space-evenly;
         margin: 0 300px;
+        position: relative;
       }
       #buttons button {
-        background-color: green;
+        background-color: #075f80;
         color: white;
+        border-radius: 5px;
+        padding: 5px;
       }
     </style>
   </head>
@@ -95,8 +98,8 @@
       </div>
     </div>
     <div id="buttons">
-      <button id="start">start</button>
-      <button id="stop">stop</button>
+      <button id="start">Start</button>
+      <button id="stop">Stop</button>
     </div>
   </body>
   <script>
@@ -117,6 +120,7 @@
     };
 
     start.addEventListener("click", () => {
+      clearInterval(id);
       i = 0;
       addAnimation();
       id = setInterval(addAnimation, 2000);
